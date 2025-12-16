@@ -13,7 +13,6 @@
             <ColumnDefinition Width="380"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Left: Sources (placeholder) -->
         <Border Grid.Column="0" Background="#111827" Padding="12">
             <TextBlock Text="Sources"
                        Foreground="#38BDF8"
@@ -21,19 +20,80 @@
                        FontWeight="SemiBold"/>
         </Border>
 
-        <!-- Center: Articles list (placeholder) -->
-        <Border Grid.Column="1" Background="#0B0F14" Padding="8">
-            <TextBlock Text="Liste des news (à brancher au ViewModel)"
-                       Foreground="White"
-                       VerticalAlignment="Top"/>
-        </Border>
+        <ListBox Grid.Column="1"
+                 ItemsSource="{Binding Articles}"
+                 SelectedItem="{Binding SelectedArticle}"
+                 Background="#0B0F14"
+                 BorderThickness="0"
+                 Padding="6">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="6" Padding="12" Background="#111827" CornerRadius="10">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}"
+                                       Foreground="White"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                            <DockPanel Margin="0,6,0,0">
+                                <TextBlock Text="{Binding Source}"
+                                           Foreground="#94A3B8"
+                                           FontSize="11"
+                                           DockPanel.Dock="Left"/>
+                                <TextBlock Text="{Binding PublishedAt, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                                           Foreground="#64748B"
+                                           FontSize="11"
+                                           HorizontalAlignment="Right"/>
+                            </DockPanel>
+                            <TextBlock Text="{Binding Summary}"
+                                       Margin="0,8,0,0"
+                                       Foreground="#CBD5E1"
+                                       FontSize="12"
+                                       TextWrapping="Wrap"
+                                       MaxHeight="48"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-        <!-- Right: Details (placeholder) -->
         <Border Grid.Column="2" Background="#111827" Padding="16">
-            <TextBlock Text="Détails"
-                       Foreground="White"
-                       FontSize="16"
-                       FontWeight="SemiBold"/>
+            <StackPanel>
+                <TextBlock Text="Détails"
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="SemiBold"/>
+
+                <Border Margin="0,12,0,0" Background="#0B0F14" CornerRadius="10" Padding="12">
+                    <StackPanel DataContext="{Binding SelectedArticle}">
+                        <TextBlock Text="{Binding Title}"
+                                   Foreground="White"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                        <TextBlock Text="{Binding Source}"
+                                   Margin="0,6,0,0"
+                                   Foreground="#94A3B8"
+                                   FontSize="12"/>
+
+                        <TextBlock Text="{Binding PublishedAt, StringFormat={}{0:dd/MM/yyyy HH:mm}}"
+                                   Margin="0,2,0,0"
+                                   Foreground="#64748B"
+                                   FontSize="12"/>
+
+                        <TextBlock Text="{Binding Summary}"
+                                   Margin="0,10,0,0"
+                                   Foreground="#CBD5E1"
+                                   TextWrapping="Wrap"/>
+
+                        <TextBlock Text="{Binding Url}"
+                                   Margin="0,12,0,0"
+                                   Foreground="#38BDF8"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>
