@@ -5,7 +5,7 @@ namespace CyberPulse.App;
 
 public partial class App : Application
 {
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
 
@@ -16,5 +16,6 @@ public partial class App : Application
         };
 
         window.Show();
+        await vm.LoadAsync();
     }
 }
